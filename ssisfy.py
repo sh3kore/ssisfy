@@ -407,11 +407,11 @@ class DpapiBackend:
             if len(nt_hash_bytes) != 16:
                 raise ValueError("NT hash must be exactly 16 bytes / 32 hexadecimal characters")
             if not sid:
-                raise ValueError("SID is required with --nt-hash")
+                raise ValueError("SID is required with --hash")
             candidates = self.deriveKeysFromUserkey(sid, nt_hash_bytes)
         else:
             if not sid or password is None:
-                raise ValueError("SID and user password are required unless --master-key-hex, --nt-hash, or --backup-key is supplied")
+                raise ValueError("SID and user password are required unless --master-key-hex, --hash, or --backup-key is supplied")
             candidates = self.deriveKeysFromUser(sid, password)
         for candidate in candidates:
             decrypted = master.decrypt(candidate)
@@ -781,7 +781,7 @@ def cmd_password(args: argparse.Namespace) -> int:
 
 def cmd_dpapi(args: argparse.Namespace) -> int:
     if sum(value is not None for value in (args.password, args.nt_hash, args.master_key_hex, args.backup_key)) > 1:
-        raise SystemExit("Use only one of --password, --nt-hash, --master-key-hex, or --backup-key")
+        raise SystemExit("Use only one of --password, --hash, --master-key-hex, or --backup-key")
     if args.password is None and args.nt_hash is None and args.master_key_hex is None and args.backup_key is None:
         import getpass
         args.password = getpass.getpass("Authorized Windows user password: ")
