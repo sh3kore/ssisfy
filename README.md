@@ -2,6 +2,8 @@
 
 ssisfy is a security tool for inspecting SQL Server Integration Services (SSIS) artifacts, identifying their protection levels, and recovering encrypted content using password candidates or supplied DPAPI artifacts. It extracts connection details, passwords, parameters, variables, and file paths from accessible or decrypted content.
 
+The inner workings of this method are described in this Blog [Extracting Secrets from SSIS Artifacts](https://sh3kore.gitbook.io/sh3kore/writeups/extracting-secrets-from-ssis-artifacts).
+
 ## Installation
 
 Designed to run on Linux with Python 3. Install the dependencies:
